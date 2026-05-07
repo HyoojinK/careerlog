@@ -25,8 +25,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/loginCheck")
-	public String loginCheck(HttpSession session, UserDto LoginInfo, RedirectAttributes rttr
-) {
+	public String loginCheck(HttpSession session, UserDto LoginInfo, RedirectAttributes rttr) {
 		
 		UserDto userInfo = userMapper.findByUserId(LoginInfo.getUserId());
 		if( userInfo != null )
@@ -44,4 +43,6 @@ public class LoginController {
 		rttr.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		return "redirect:/login";
 	}
+	
+	
 }

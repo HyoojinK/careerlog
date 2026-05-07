@@ -32,4 +32,9 @@ function onloadBtnEvent(){
 //		}
 //		gfn_ajax("/loginCheck", "POST", params, true, onevent)
 	})
+	
+	$('#btnJoin').on('click', function(){
+		
+	})
+	
 }
