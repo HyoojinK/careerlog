@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<div th:fragment="commonLayout">
+		<div id="topBar">
+			<button id=""></button>
+			<div class="user_wrap">
+				<div class="user_image"></div>
+				<div class="user_name">김효진 님</div>
+				<div class="user_info">
+					<ul>
+						<li>마이페이지</li>
+						<li>로그아웃</li>
+					</ul>
+				</div>
+			</div>
+		
+		</div>
+		<div id="sideBar">
+			<div class="logo_wrap">
+				<img th:src="@{/images/logo.png}"/>
+			</div>
+			<div class="menu_wrap">
+				<ul>
+					<li>대시보드</li>
+					<li>지원 회사 관리</li>
+					<li>면접 일정 관리</li>
+					<li>메모/회고</li>
+					<li>통계</li>
+				</ul>
+			
+			</div>
+		</div>
+	</div>
+</body>
+</html>
