@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>404 ERROR</title>
+	<link rel="stylesheet" th:href="@{/css/error.css}">
+</head>
+<body>
+	<div class="page_wrap">
+		<div class="error_wrap">
+			<div class="error_code">
+				404
+			</div>
+
+			<div class="error_title">
+				페이지를 찾을 수 없습니다.
+			</div>
+
+			<div class="error_desc">
+				요청하신 페이지가 존재하지 않거나 이동되었습니다.
+			</div>
+
+			<button type="button" class="move_btn" onclick="location.href='/login'">
+				로그인페이지로 이동
+			</button>
+		</div>
+	</div>
+</body>
+</html>
