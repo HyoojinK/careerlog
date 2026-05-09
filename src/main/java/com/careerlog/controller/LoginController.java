@@ -25,24 +25,26 @@ public class LoginController {
 	}
 
 	@PostMapping("/loginCheck")
-	public String loginCheck(HttpSession session, UserDto LoginInfo, RedirectAttributes rttr) {
+	public String loginCheck(HttpSession session, UserDto loginInfo, RedirectAttributes rttr) {
 		
-		UserDto userInfo = userMapper.findByUserId(LoginInfo.getUserId());
-		if( userInfo != null )
+		UserDto userInfo = userMapper.findByUserId(loginInfo.getUserId());
+
+		if(userInfo != null)
 		{
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			boolean match = encoder.matches( LoginInfo.getPassword(), userInfo.getPassword());
-			
+			boolean match = encoder.matches(loginInfo.getPassword(), userInfo.getPassword());
+
 			if(match)
 			{
 				userMapper.updateLastLogin(userInfo.getUserId());
 				session.setAttribute("userInfo", userInfo);
-				return "redirect:/home";
+
+				return "redirect:/page/dashboard";
 			}
 		}
+
 		rttr.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		return "redirect:/login";
 	}
-	
 	
 }

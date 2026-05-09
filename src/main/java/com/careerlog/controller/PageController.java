@@ -9,13 +9,11 @@ public class PageController {
 	@GetMapping("/")
 	public String home()
 	{
-		return "redirect:/dashboard";
+		return "redirect:/page/dashboard";
 	}
 
-	@GetMapping("/{view}")
-	public String moveView(
-		@PathVariable String view
-	)
+	@GetMapping("/page/{view}")
+	public String moveView(@PathVariable String view)
 	{
 		return view;
 	}

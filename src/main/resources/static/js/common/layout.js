@@ -21,6 +21,6 @@ function onloadBtnEvent() {
 	
 	$('.menu_wrap li').on('click', function()
 	{
-		location.href = $(this).data('url');
+		location.href = "/page" + $(this).data('url');
 	});
 }
