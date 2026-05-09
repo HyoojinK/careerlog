@@ -13,23 +13,23 @@
 			</div>
 			<div class="menu_wrap">
 				<ul>
-					<li>
+					<li data-url="/dashboard">
 						<img th:src="@{/images/menu/icon_home.png}">
 						<span>대시보드</span>
 					</li>
-					<li>
+					<li data-url="/company-list">
 						<img th:src="@{/images/menu/icon_company.png}">
 						<span>지원 회사 관리</span>
 					</li>
-					<li>
+					<li data-url="/interview-list">
 						<img th:src="@{/images/menu/icon_calendar.png}">
 						<span>면접 일정 관리</span>
 					</li>
-					<li>
+					<li data-url="/memo-list">
 						<img th:src="@{/images/menu/icon_note.png}">
 						<span>메모 / 회고</span>
 					</li>
-					<li>
+					<li data-url="/statistics">
 						<img th:src="@{/images/menu/icon_chart.png}">
 						<span>통계</span>
 					</li>
@@ -46,12 +46,17 @@
 			<div class="user_wrap">
 				<div class="user_image"></div>
 				<div class="user_name">김효진 님</div>
-				<div class="user_info">
-					<ul class="dis_none">
-						<li>마이페이지</li>
-						<li>로그아웃</li>
-					</ul>
-				</div>
+				<div id="userInfo" class="user_info"></div>
+				<ul class="dis_none">
+					<li>
+						<img th:src="@{/images/icon_mypage.png}">
+						<span>마이페이지</span>
+					</li>
+					<li>
+						<img th:src="@{/images/icon_logout.png}">
+						<span>로그아웃</span>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
