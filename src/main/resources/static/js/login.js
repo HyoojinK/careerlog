@@ -3,7 +3,7 @@ $(function(){
 });
 
 function onloadBtnEvent(){
-	$('#loginCheck').on('click', function(){
+	$('#loginCheck').off('click').on('click', function(){
 		var loginId = $('#idValue').val();
 		var loginPwd = $('#pwValue').val();
 		if(gfn_isEmpty(loginId))
@@ -21,7 +21,7 @@ function onloadBtnEvent(){
 
 	})
 	
-	$('#btnJoin').on('click', function(){
+	$('#btnJoin').off('click').on('click', function(){
 		
 	})
 	
