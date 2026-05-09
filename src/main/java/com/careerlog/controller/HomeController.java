@@ -16,7 +16,7 @@ public class HomeController {
 		}
 		else
 		{
-			return "home";
+			return "main";
 		}
 	}
 }
