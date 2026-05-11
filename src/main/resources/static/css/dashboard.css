@@ -1,0 +1,110 @@
+p {
+	margin: 0;
+}
+
+.dashboard_greeting {
+	
+}
+
+.greeting_desc {
+	font-size: 14px;
+	margin: 3px 0;
+}
+
+.dashboard_card_list {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin: 10px 0;
+}
+
+.greeting_title {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.dashboard_card {
+	display: flex;
+	width: 24%;
+	min-width: 22.5%;
+	padding: 30px 20px;
+	align-items: flex-start;
+	border-radius: 3px;
+}
+
+.card_icon_box {
+	width: 60px;
+	height: 60px;
+	border-radius: 5px;
+	margin-right: 10px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25px;
+}
+
+.card_label {
+	font-weight: bold;
+}
+
+.card_count {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.card_desc {
+	font-size: 14px;
+}
+
+.dashboard_card.apply_card {
+    background: #eff6fd;
+    border: 1px solid #dceafc;
+}
+
+.dashboard_card.apply_card .card_label {
+    color: #0b2978;
+}
+
+.dashboard_card.apply_card .card_icon_box {
+    background-color: #deecfe;
+    background-image: url("/images/icon_down.png");
+}
+
+.dashboard_card.interview_card {
+    background: #fefbed;
+    border: 1px solid #fbf0d5;
+}
+
+.dashboard_card.interview_card .card_label {
+    color: #6c2008;
+}
+
+.dashboard_card.interview_card .card_icon_box {
+    background-color: #fff1cf;
+    background-image: url("/images/icon_down.png");
+}
+
+.dashboard_card.pass_card {
+    background: #f2fdf4;
+    border: 1px solid #c5f7cf;
+}
+
+.dashboard_card.pass_card .card_label {
+    color: #4b7051;
+}
+
+.dashboard_card.pass_card .card_icon_box {
+    background-color: #def8e7;
+}
+
+.dashboard_card.fail_card {
+    background: #fef4f3;
+    border: 1px solid #f8e8e9;
+}
+
+.dashboard_card.fail_card .card_label {
+    color: #9f2c2c;
+}
+
+.dashboard_card.fail_card .card_icon_box {
+    background-color: #fee1e1;
+}
