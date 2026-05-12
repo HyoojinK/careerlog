@@ -1,4 +1,4 @@
-package com.careerlog.dto;
+package com.careerlog.user.dto;
 
 import java.time.LocalDateTime;
 

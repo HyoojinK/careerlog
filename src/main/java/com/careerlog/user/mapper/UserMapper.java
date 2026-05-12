@@ -1,8 +1,8 @@
-package com.careerlog.mapper;
+package com.careerlog.user.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.careerlog.dto.UserDto;
+import com.careerlog.user.dto.UserDto;
 
 @Mapper
 public interface UserMapper {

@@ -1,4 +1,4 @@
-package com.careerlog.controller;
+package com.careerlog.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.careerlog.dto.UserDto;
-import com.careerlog.mapper.UserMapper;
+import com.careerlog.user.dto.UserDto;
+import com.careerlog.user.mapper.UserMapper;
 
 import jakarta.servlet.http.HttpSession;
 
