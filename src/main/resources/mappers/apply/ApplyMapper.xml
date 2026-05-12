@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.careerlog.apply.mapper.ApplyMapper">
+
+	<select id="selectApplyList" resultType="ApplyDto">
+		SELECT
+			company_name,
+			apply_status,
+			apply_date,
+			recruit_url,
+			job_position,
+			work_type,
+			salary,
+			manager_name,
+			manager_email,
+			manager_phone,
+			memo,
+			favorite_yn,
+			next_schedule_dt,
+			reg_dt,
+			updt_dt
+		FROM
+			tb_apply
+		ORDER BY
+			reg_dt DESC
+		LIMIT #{start}, #{length}
+	</select>
+
+	<select id="selectApplyTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_apply
+	</select>
+
+</mapper>
