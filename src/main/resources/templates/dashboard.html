@@ -59,13 +59,34 @@
 				</div>
 				
 				<div class="dashboard_panel_wrap">
-					<div class="dashboard_panel"></div>
-					<div class="dashboard_panel"></div>
-					<div class="dashboard_panel"></div>
-					<div class="dashboard_panel"></div>
+					<div class="dashboard_panel">
+						<div class="panel_label">
+							<p>최근 지원 내역</p>
+							<a th:href="@{/page/apply-list}" class="more_link">더보기</a>
+						</div>
+						<table id="applyGrid"></table>
+					</div>
+					<div class="dashboard_panel">
+						<div class="panel_label">
+							<p>면접 일정</p>
+							<a th:href="@{/page/interview-list}" class="more_link">더보기</a>
+						</div>
+					</div>
+					<div class="dashboard_panel">
+						<div class="panel_label">
+							<p>지원 현황</p>
+							<a th:href="@{/page/statistics}" class="more_link">더보기</a>
+						</div>
+					</div>
+					<div class="dashboard_panel">
+						<div class="panel_label">
+							<p>최근 메모 / 회고</p>
+							<a th:href="@{/page/memo-list}" class="more_link">더보기</a>
+						</div>
+					</div>
 				</div>
 			</div>
-c		</div>
+		</div>
 	</div>
 </body>
 </html>

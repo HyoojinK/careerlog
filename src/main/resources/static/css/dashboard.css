@@ -116,6 +116,79 @@ p {
 }
 
 .dashboard_panel_wrap .dashboard_panel {
-	border: 1px solid #b9b9b9;
+	border: 1px solid #edf0f3;
 	border-radius: 3px;
+	overflow: hidden;
+}
+
+.dashboard_panel_wrap .dashboard_panel .panel_label {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-weight: bold;
+	font-size: 18px;
+	padding: 15px;
+	height: 60px;
+}
+
+.dashboard_panel_wrap .dashboard_panel .panel_label .more_link {
+	display: inline-block;
+	font-size: 12px;
+	text-decoration: none;
+	color: #6a6a6a;
+	padding: 5px 8px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+.dashboard_panel_wrap .dashboard_panel .panel_label .more_link:after {
+	content: ">";
+	margin-left: 4px;
+}
+
+/** ì§€ì›ì´ë ¥ **/
+table.dataTable tbody td {
+	height: 50px;
+	cursor: default;
+}
+
+.status_badge {
+	display: inline-block;
+	padding: 5px 12px;
+	border-radius: 8px;
+	background: #d8efff;
+	color: #0676d9;
+	font-size: 13px;
+	font-weight: 700;
+	text-align: center;
+	width: 85px;
+}
+
+.applied {
+	background: #d8efff;
+	color: #0676d9;
+}
+
+.document_pass {
+	background: #fff2d8;
+	color: #d97706;
+}
+
+.interview {
+	background: #ede9fe;
+	color: #6d28d9;
+}
+
+.cancelled {
+	background: #f3f4f6;
+	color: #6b7280;
+}z
+
+.failed {
+	background: #fee9e9;
+	color: #d92828;
+}
+
+.final_pass {
+	background: #e9fee9;
+	color: #1ea937;
 }
