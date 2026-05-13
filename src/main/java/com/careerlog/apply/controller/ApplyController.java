@@ -29,7 +29,6 @@ public class ApplyController {
 		String drawParam = request.getParameter("draw");
 		String startParam = request.getParameter("start");
 		String lengthParam = request.getParameter("length");
-
 		int draw = 0;
 		int start = 0;
 		int length = 30;
