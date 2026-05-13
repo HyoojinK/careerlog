@@ -4,18 +4,146 @@
 	<meta charset="UTF-8">
 	<title>CareerLog | 지원 회사 관리</title>
 	<th:block th:replace="~{common/head :: head}"></th:block>
-	<link rel="stylesheet" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.css" />
-	<link rel="stylesheet" href="/css/dashboard.css">
+	<link rel="stylesheet" href="/css/apply-list.css">
 	
-	<script src="https://cdn.datatables.net/2.3.8/js/dataTables.js"></script></head>
 	<script src="/js/apply-list.js"></script>
+	
 <body>
 	<div class="page_wrap">
 		<th:block th:replace="~{common/layout :: commonLayout}"></th:block>
 		
 		<div class="content_wrap">
-			<div class="content_inner">
-				<table id="applyGrid"></table>
+			<div class="content_inner apply_page_inner">
+				<div id="applyList" class="apply_list_wrap">
+					<div class="apply_search_wrap">
+<!-- 						<input type="text" id="companySearch" class="company_search_input" placeholder="회사명 검색"> -->
+		
+						<select id="searchApplyStatus" class="search_apply_status">
+							<option value="">전체 상태</option>
+							<option value="0">지원 취소</option>
+							<option value="1">지원 완료</option>
+							<option value="2">서류 합격</option>
+							<option value="3">면접 예정</option>
+							<option value="4">불합격</option>
+							<option value="5">최종 합격</option>
+						</select>
+		
+						<button type="button" class="apply_add_btn">회사 등록</button>
+					</div>
+		
+					<table id="applyGrid"></table>
+				</div>
+		
+				<div id="applyInfo" class="apply_info_wrap">
+					<div class="apply_info_header">
+						<div class="apply_title_box">
+							<span class="apply_company_name">당근마켓</span>
+							<span class="status_badge interview">면접 예정</span>
+						</div>
+		
+						<div class="apply_btn_box">
+							<button type="button" id="applyEdit" class="apply_edit_btn">수정</button>
+							<button type="button" id="applyDelete" class="apply_delete_btn">삭제</button>
+						</div>
+					</div>
+		
+					<div class="apply_detail_box">
+						<div class="apply_detail_col">
+							<div class="apply_detail_row">
+								<span class="detail_label">지원일</span>
+								<input class="detail_value" value="2025.05.12" disabled>
+							</div>
+		
+							<div class="apply_detail_row">
+								<span class="detail_label">채용 공고</span>
+								<input class="detail_value" value="https://careers.daangn.com" disabled>
+							</div>
+		
+							<div class="apply_detail_row">
+								<span class="detail_label">직무</span>
+								<input class="detail_value" value="백엔드 개발자" disabled>
+							</div>
+		
+							<div class="apply_detail_row">
+								<span class="detail_label">근무 형태</span>
+								<input class="detail_value" value="정규직" disabled>
+							</div>
+		
+							<div class="apply_detail_row">
+								<span class="detail_label">연봉</span>
+								<input class="detail_value" value="4,500만원 ~ 6,000만원" disabled>
+							</div>
+						</div>
+		
+						<div class="apply_detail_col">
+							<div class="apply_detail_row">
+								<span class="detail_label">담당자</span>
+								<input class="detail_value" value="-" disabled>
+							</div>
+		
+							<div class="apply_detail_row">
+								<span class="detail_label">이메일</span>
+								<input class="detail_value" value="-" disabled>
+							</div>
+		
+							<div class="apply_detail_row">
+								<span class="detail_label">연락처</span>
+								<input class="detail_value" value="-" disabled>
+							</div>
+		
+							<div class="apply_detail_row">
+								<span class="detail_label">메모</span>
+								<textarea class="detail_value" disabled>회사 문화가 좋다고 함.기술 블로그 글 읽어보기!</textarea>
+							</div>
+						</div>
+					</div>
+		
+					<div id="changeStatus" class="dis_none apply_status_change_box">
+						<span class="status_label">상태 변경</span>
+						<select class="change_apply_status">
+							<option value="0">지원 취소</option>
+							<option value="1">지원 완료</option>
+							<option value="2">서류 합격</option>
+							<option value="3">면접 예정</option>
+							<option value="4">불합격</option>
+							<option value="5">최종 합격</option>
+						</select>
+					</div>
+		
+					<div class="apply_tab_wrap">
+						<ul class="apply_tab_list">
+							<li>면접 일정</li>
+							<li>메모</li>
+							<li class="active">이력 로그</li>
+						</ul>
+		
+						<div class="apply_log_list">
+							<div class="apply_log_item">
+								<span class="log_dot"></span>
+								<span class="log_date">2025.05.12 (월) 14:30</span>
+								<span class="status_badge interview">면접 예정</span>
+								<span class="log_text">상태가 '면접 예정'으로 변경되었습니다.</span>
+								<span class="log_user">김효진</span>
+							</div>
+		
+							<div class="apply_log_item">
+								<span class="log_dot"></span>
+								<span class="log_date">2025.05.10 (토) 10:20</span>
+								<span class="status_badge document_pass">서류 합격</span>
+								<span class="log_text">상태가 '서류 합격'으로 변경되었습니다.</span>
+								<span class="log_user">김효진</span>
+							</div>
+		
+							<div class="apply_log_item">
+								<span class="log_dot"></span>
+								<span class="log_date">2025.05.08 (목) 16:45</span>
+								<span class="status_badge apply_done">지원 완료</span>
+								<span class="log_text">지원서를 제출했습니다.</span>
+								<span class="log_user">김효진</span>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

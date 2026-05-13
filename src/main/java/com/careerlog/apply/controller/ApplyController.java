@@ -23,12 +23,14 @@ public class ApplyController {
 	private ApplyMapper applyMapper;
 	
 	@RequestMapping(value="/selectApplyGridData", method={RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=UTF-8")//	public @ResponseBody void selectGridData(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) {
-	public @ResponseBody Map<String, Object> selectGridData(HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody Map<String, Object> selectApplyGridData(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
+		String previewYn = request.getParameter("previewYn");
 		String drawParam = request.getParameter("draw");
 		String startParam = request.getParameter("start");
 		String lengthParam = request.getParameter("length");
+		
 		int draw = 0;
 		int start = 0;
 		int length = 30;
@@ -49,7 +51,7 @@ public class ApplyController {
 		}
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-
+		paramMap.put("previewYn", previewYn);
 		paramMap.put("start", start);
 		paramMap.put("length", length);
 

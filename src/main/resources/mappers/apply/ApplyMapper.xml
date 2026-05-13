@@ -26,12 +26,19 @@
 			tb_apply
 		ORDER BY
 			reg_dt DESC
-		LIMIT #{start}, #{length}
+		<choose>
+			<when test='previewYn == "Y"'>
+				LIMIT 4
+			</when>
+			<otherwise>
+				LIMIT #{start}, #{length}
+			</otherwise>
+		</choose>
 	</select>
 
 	<select id="selectApplyTotalCount" resultType="int">
 		SELECT COUNT(*)
 		FROM tb_apply
 	</select>
-
+	
 </mapper>

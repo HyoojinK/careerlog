@@ -1,5 +1,10 @@
 $(function(){
 	applyGrid.load('#applyGrid');
+	$('#applyEdit').on('click', function(){
+		$('.detail_value').attr('disabled', false);
+		$('#changeStatus').show();
+	})
+		
 });
 
 var mv_applyData = null;
@@ -19,42 +24,107 @@ var applyGrid = {
 		
 		mv_applyGridParam = {};
 		var columns = [
-			{title : "표출순서", data : "companyId", name: "apply_ORDER", width : "50px", className : "dt-center", defaultContent : "", visible: true
-//				, render: function(data, type, full, meta) {
-//				}
-			}
-			, {title : "번호", data : "userId", width : "25px", className : "dt-center", defaultContent : "", visible: true}
-			, {title : "제목", data : "companyName", width : "280px", className : "dt-left", defaultContent : ""
-//				, render: function(data, type, full, meta) {
-//				}
-			}
-			, {title: "사용유무", data: "applyStatus", width: "50px", className: "dt-center", defaultContent: "", visible: true
-//				, render: function(data, type, full, meta) {
-//				}
+			{
+				title : "",
+				data : "favoriteYn",
+				width : "40px",
+				className : "dt-center",
+				defaultContent : "",
+				render: function(data, type, row, meta)
+				{
+					if(data == 'Y')
+					{
+						return '<button class="favorite favorite_y"></button>';
+					}
+
+					return '<button class="favorite favorite_n"></button>';
+				}			
+			},
+			{
+				title : "회사명",
+				data : "companyName",
+				width : "140px",
+				className : "dt-left",
+				defaultContent : ""
+			},
+			{
+				title : "지원 상태",
+				data : "applyStatus",
+				width : "100px",
+				className : "dt-center",
+				render: function(data, type, row, meta)
+				{
+					if(data == '0')
+					{
+						return '<span class="status_badge cancelled">지원 취소</span>';
+					}
+					else if(data == '1')
+					{
+						return '<span class="status_badge applied">지원 완료</span>';
+					}
+					else if(data == '2')
+					{
+						return '<span class="status_badge document_pass">서류 합격</span>';
+					}
+					else if(data == '3')
+					{
+						return '<span class="status_badge interview">면접 예정</span>';
+					}
+					else if(data == '111')
+					{
+						return '<span class="status_badge final_pass">최종 합격</span>';
+					}
+					else if(data == '999')
+					{
+						return '<span class="status_badge failed">불합격</span>';
+					}
+
+					return '<span class="status_badge"></span>';
+				}
+			},
+			{
+				title : "지원일",
+				data : "applyDate",
+				width : "120px",
+				className : "dt-center",
+				defaultContent : "",
+				render: function(data, type, row, meta)
+				{
+					if(!data)
+					{
+						return '-';
+					}
+
+					return data.split(' ')[0];
+				}
 			}
 		];
-		
+
 		var options = {
-			responsive: true,
 			retrieve: true,
-			paginate: true,	// 페이징 활성화 여부
-			pagingType: "full_numbers",
-			autoWidth: 1920, // 컬럼 자동 사이즈 조절
-			autoHeight: true, // 로우 수에 맞게 상하 자동 조절
-			scrollX: true, // 좌우 스크롤 사용 여부(true/false) / 고정 된 좌우 길이값(300px)
-			scrollY: "auto", // 상하 스크롤 사용 여부(true/false) / 고정된 상하 길이값(300px) / "auto"
-			ordering: true, // 헤더 셀 선택 시 선택 된 셀 기준으로 order by 처리
-			searching: false, // 텍스트 검색 활성화 여부, serverSide가 true일 경우 조회 된 내용 중에서만 검색한다.
-			info: true, // 조회 건 수 표시 여부
-			pageLength: 30, // 출력 할 Row 갯 수
-			lengthMenu: [[30, 60, 90, -1], [30, 60, 90, "All"]], // 변경할 Row 선택 기준
-			dom: 'rt<"bottom"fliBp><"clear">', // 화면 그리는순서 설정 (css영향을 받으니 고정으로 사용할 것) B:버튼 f:검색 l:조회갯수 i:조회건수 p:페이징	
-			buttons: [],
-			processing: true, // 로딩표시 활성화 여부 true/false
-			language: {
-				"processing": '<div class="dt-loading"><i class="dt-loading-spiner"></i></div>'
+			paginate: true,
+			pagingType: "simple_numbers",
+			autoWidth: false,
+			scrollX: false,
+			ordering: false,
+			searching: false,
+			info: false,
+			lengthChange: false,
+			pageLength: 10,
+			dom: 'rt<"dt_bottom"p>',
+			processing: true,
+			serverSide: true,
+			language:
+			{
+				processing: '<div class="dt-loading"><i class="dt-loading-spiner"></i></div>',
+				emptyTable: '등록된 지원 회사가 없습니다.',
+				zeroRecords: '검색 결과가 없습니다.',
+				paginate:
+				{
+					previous: '‹',
+					next: '›'
+				}
 			},
-			serverSide: true, // 쿼리를 통한 페이징 처리 활성화 여부
 			ajax:
 			{
 				url: "/selectApplyGridData",
@@ -68,14 +138,22 @@ var applyGrid = {
 					}
 				}
 			},
-			rowReorder: {
-				
-			},
-			rowCallback: function(row, data, index) {
-				
-			},
-			columns : columns
-		}
+			columns : columns,
+			drawCallback: function(settings)
+			{
+				var api = this.api();
+				var pageInfo = api.page.info();
+
+				if(pageInfo.pages <= 1)
+				{
+					$(api.table().container()).find('.dt_bottom').hide();
+				}
+				else
+				{
+					$(api.table().container()).find('.dt_bottom').show();
+				}
+			}
+		};
 		
 		mv_applyGridObj = $(gridId).on('preXhr.dt', function(e, settings, data) { // ajax 로드 전	
 			
@@ -87,7 +165,7 @@ var applyGrid = {
 			
 		}).on('init.dt', function() { // 전체 완료 후
 				applyGrid.event(gridId);
-			}).DataTable(options);
+		}).DataTable(options);
 	},
 	
 	event: function(gridId) {
@@ -105,3 +183,4 @@ var applyGrid = {
 		
 	}
 }
+
