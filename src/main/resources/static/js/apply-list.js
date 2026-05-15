@@ -161,8 +161,6 @@ var applyGrid = {
 			
 		}).on('page.dt', function () {
 			
-			dtClearPosTop(gridId); // 페이징 처리 시 스크롤 상단으로 이동
-			
 		}).on('init.dt', function() { // 전체 완료 후
 				applyGrid.event(gridId);
 		}).DataTable(options);
@@ -170,17 +168,95 @@ var applyGrid = {
 	
 	event: function(gridId) {
 		var $grid = $(gridId);
+
+		$grid.find('tbody').on('click', 'td', function() {
+			var $this = $(this);
+			$this.parents('tbody').children('tr').removeClass('dt-active')
+			$this.parent('tr').addClass('dt-active');
+			var rd = mv_applyGridObj.row(this.parentElement).data();
+			setApplyInfo(rd);
+		});
+		
 		$grid.find('tbody').on('dblclick', 'td', function(e) {
 			var rd = mv_applyGridObj.row(this.parentElement).data();
 		
 		});
-		
-		$grid.find('tbody').on('click', 'button.useYn', function() {
-			var $this = $(this);
-			var rd = mv_applyGridObj.row(this.parentElement).data();
-			
-		});
-		
 	}
+}
+
+function setApplyInfo(data){
+	$('#emptyInfo').hide();
+	$('#applyInfo').show();
+	
+	var applyStatus = "";
+	var applyStatusClass = "";
+	switch(Number(data.applyStatus))
+	{
+		case 0:
+		{
+			applyStatus = "지원 취소";
+			applyStatusClass = "cancelled";
+			break;
+		}
+
+		case 1:
+		{
+			applyStatus = "지원 완료";
+			applyStatusClass = "applied";
+			break;
+		}
+
+		case 2:
+		{
+			applyStatus = "서류 합격";
+			applyStatusClass = "document_pass";
+			break;
+		}
+
+		case 3:
+		{
+			applyStatus = "면접 예정";
+			applyStatusClass = "interview";
+			break;
+		}
+
+		case 999:
+		{
+			applyStatus = "불합격";
+			applyStatusClass = "failed";
+			break;
+		}
+
+		case 111:
+		{
+			applyStatus = "최종 합격";
+			applyStatusClass = "final_pass";
+			break;
+		}
+
+		default:
+		{
+			applyStatus = "-";
+			applyStatusClass = "";
+			break;
+		}
+	}
+	$('#applyStatus')
+	.removeClass('cancelled applied document_pass interview failed final_pass')
+	.addClass(applyStatusClass)
+	.text(applyStatus)
+		
+	gfn_setText('#applyCompanyName', data.companyName);
+	gfn_setText('#applyStatus', applyStatus);
+
+	gfn_setValue('#applyDate', data.applyDate);
+	gfn_setValue('#recruitUrl', data.recruitUrl);
+	gfn_setValue('#jobPosition', data.jobPosition);
+	gfn_setValue('#workType', data.workType);
+	gfn_setValue('#salary', data.salary);
+	gfn_setValue('#managerName', data.managerName);
+	gfn_setValue('#managerEmail', data.managerEmail);
+	gfn_setValue('#managerPhone', data.managerPhone);
+	gfn_setValue('#memo', data.memo);
 }
 

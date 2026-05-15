@@ -25,6 +25,14 @@ function gfn_isEmpty(obj) {
 	return true;
 }
 
+function gfn_setValue(targetId, value) {
+	$(targetId).val(gfn_isEmpty(value) ? '-' : value);
+}
+
+function gfn_setText(targetId, value) {
+	$(targetId).text(gfn_isEmpty(value) ? '-' : value);
+}
+
 
 function gfn_ajax(url, method, params, async, callback) {
 	var contextPath = gv_contextInfo.contextPath;

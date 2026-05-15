@@ -45,12 +45,12 @@ table.dataTable tbody tr {
 	cursor: pointer;
 }
 
-table.dataTable tbody tr:hover td {
-	background: #f8fbff;
+table.dataTable tbody tr.dt-active td {
+	background: #eef6ff !important;
 }
 
-table.dataTable tbody tr.selected td {
-	background: #eef6ff !important;
+table.dataTable tbody tr:hover td {
+	background: #f8fbff;
 }
 
 table.dataTable.no-footer {
