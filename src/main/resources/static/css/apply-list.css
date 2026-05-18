@@ -131,10 +131,14 @@
 	font-weight: 800;
 	color: #111827;
 }
+.apply_company_name:disabled {
+	width: 120px !important;
+}
 
 .status_badge {
 	display: inline-block;
 	padding: 5px 12px;
+	border: none;
 	border-radius: 8px;
 	font-size: 13px;
 	font-weight: 700;
@@ -147,9 +151,10 @@
 	gap: 10px;
 }
 
-.apply_edit_btn, .apply_delete_btn {
+.apply_btn_box button {
 	height: 38px;
 	padding: 0 14px;
+	border: 1px solid;
 	border-radius: 8px;
 	background: #ffffff;
 	font-size: 14px;
@@ -158,12 +163,12 @@
 }
 
 .apply_edit_btn {
-	border: 1px solid #d9dee8;
+	border-color: #d9dee8;
 	color: #374151;
 }
 
 .apply_delete_btn {
-	border: 1px solid #fecaca;
+	border-color: #fecaca;
 	color: #ef4444;
 }
 

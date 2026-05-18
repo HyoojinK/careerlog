@@ -1,10 +1,13 @@
 $(function(){
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = ('0' + (date.getMonth() + 1)).slice(-2);
+	var day = ('0' + date.getDate()).slice(-2);
+	var today = year + '-' + month + '-' + day;
+	$('#applyDate').attr('max', today);
+	
 	applyGrid.load('#applyGrid');
-	$('#applyEdit').on('click', function(){
-		$('.detail_value').attr('disabled', false);
-		$('#changeStatus').show();
-	})
-		
+	applyInfo.init();
 });
 
 var mv_applyData = null;
@@ -174,7 +177,8 @@ var applyGrid = {
 			$this.parents('tbody').children('tr').removeClass('dt-active')
 			$this.parent('tr').addClass('dt-active');
 			var rd = mv_applyGridObj.row(this.parentElement).data();
-			setApplyInfo(rd);
+			applyInfo.init();
+			applyInfo.setDetail(rd);
 		});
 		
 		$grid.find('tbody').on('dblclick', 'td', function(e) {
@@ -184,79 +188,174 @@ var applyGrid = {
 	}
 }
 
-function setApplyInfo(data){
-	$('#emptyInfo').hide();
-	$('#applyInfo').show();
-	
-	var applyStatus = "";
-	var applyStatusClass = "";
-	switch(Number(data.applyStatus))
+var applyInfo =
+{
+	init: function()
 	{
-		case 0:
-		{
-			applyStatus = "지원 취소";
-			applyStatusClass = "cancelled";
-			break;
-		}
+		this.bindEvent();
+		this.clear();
+	},
 
-		case 1:
-		{
-			applyStatus = "지원 완료";
-			applyStatusClass = "applied";
-			break;
-		}
-
-		case 2:
-		{
-			applyStatus = "서류 합격";
-			applyStatusClass = "document_pass";
-			break;
-		}
-
-		case 3:
-		{
-			applyStatus = "면접 예정";
-			applyStatusClass = "interview";
-			break;
-		}
-
-		case 999:
-		{
-			applyStatus = "불합격";
-			applyStatusClass = "failed";
-			break;
-		}
-
-		case 111:
-		{
-			applyStatus = "최종 합격";
-			applyStatusClass = "final_pass";
-			break;
-		}
-
-		default:
-		{
-			applyStatus = "-";
-			applyStatusClass = "";
-			break;
-		}
-	}
-	$('#applyStatus')
-	.removeClass('cancelled applied document_pass interview failed final_pass')
-	.addClass(applyStatusClass)
-	.text(applyStatus)
+	bindEvent: function()
+	{
+		// 지원정보 수정
+		$('#applyEdit').on('click', function(){
+			$('.detail_value').attr('disabled', false);
+			$('#changeStatus').show();
+		});
 		
-	gfn_setText('#applyCompanyName', data.companyName);
-	gfn_setText('#applyStatus', applyStatus);
+		// 지원정보 추가
+		$('#addApply').on('click', function(){
+			applyInfo.clear();
+			applyInfo.add();
+		});
+	},
 
-	gfn_setValue('#applyDate', data.applyDate);
-	gfn_setValue('#recruitUrl', data.recruitUrl);
-	gfn_setValue('#jobPosition', data.jobPosition);
-	gfn_setValue('#workType', data.workType);
-	gfn_setValue('#salary', data.salary);
-	gfn_setValue('#managerName', data.managerName);
-	gfn_setValue('#managerEmail', data.managerEmail);
-	gfn_setValue('#managerPhone', data.managerPhone);
-	gfn_setValue('#memo', data.memo);
-}
+	validate: function()
+	{
+		if(gfn_isEmpty($('#applyCompanyName').val()))
+		{
+			alert('회사명을 입력해주세요.');
+			$('#applyCompanyName').focus();
+			return false;
+		}
 
+		if(gfn_isEmpty($('#applyDate').val()))
+		{
+			alert('지원일을 입력해주세요.');
+			$('#applyDate').focus();
+			return false;
+		}
+
+		if(gfn_isEmpty($('#recruitUrl').val()))
+		{
+			alert('채용공고 URL을 입력해주세요.');
+			$('#recruitUrl').focus();
+			return false;
+		}
+
+		if(gfn_isEmpty($('#jobPosition').val()))
+		{
+			alert('직무를 입력해주세요.');
+			$('#jobPosition').focus();
+			return false;
+		}
+
+		return true;
+	},
+
+	setDetail: function(data)
+	{
+		$('#applyInfo, .apply_btn_box button').show();
+		$('#emptyInfo, #applyInsert').hide();
+		
+		var applyStatusStr = "";
+		var applyStatusClass = "";
+		switch(Number(data.applyStatus))
+		{
+			case 0:
+			{
+				applyStatusStr = "지원 취소";
+				applyStatusClass = "cancelled";
+				break;
+			}
+
+			case 1:
+			{
+				applyStatusStr = "지원 완료";
+				applyStatusClass = "applied";
+				break;
+			}
+
+			case 2:
+			{
+				applyStatusStr = "서류 합격";
+				applyStatusClass = "document_pass";
+				break;
+			}
+
+			case 3:
+			{
+				applyStatusStr = "면접 예정";
+				applyStatusClass = "interview";
+				break;
+			}
+
+			case 999:
+			{
+				applyStatusStr = "불합격";
+				applyStatusClass = "failed";
+				break;
+			}
+
+			case 111:
+			{
+				applyStatusStr = "최종 합격";
+				applyStatusClass = "final_pass";
+				break;
+			}
+
+			default:
+			{
+				applyStatusStr = "-";
+				applyStatusClass = "";
+				break;
+			}
+		}
+
+		$('#applyStatusStr')
+		.removeClass('cancelled applied document_pass interview failed final_pass')
+		.addClass(applyStatusClass)
+		.val(applyStatusStr)
+		
+		gfn_setValue('#applyCompanyName', data.companyName);
+		gfn_setValue('#applyStatus', data.applyStatus)
+		gfn_setValue('#applyDate', data.applyDate);
+		gfn_setValue('#recruitUrl', data.recruitUrl);
+		gfn_setValue('#jobPosition', data.jobPosition);
+		gfn_setValue('#workType', data.workType);
+		gfn_setValue('#salary', data.salary);
+		gfn_setValue('#managerName', data.managerName);
+		gfn_setValue('#managerEmail', data.managerEmail);
+		gfn_setValue('#managerPhone', data.managerPhone);
+		gfn_setValue('#memo', data.memo);
+	},
+
+	add: function()
+	{
+		$('#emptyInfo, .apply_btn_box button').hide();
+		$('#applyInfo, #changeStatus, #applyInsert').show();
+		$('.detail_value').attr('disabled', false);
+	},
+
+	update: function()
+	{
+
+	},
+
+	remove: function()
+	{
+
+	},
+
+	clear: function()
+	{
+		$('.detail_value').attr('disabled', true);
+		$('#changeStatus').hide();
+		
+		$('#applyStatusStr')
+		.removeClass('cancelled applied document_pass interview failed final_pass').val("")
+		$('#applyCompanyName').val("");
+		$('#applyStatus').val("1");
+		
+		$('#applyDate').val("");
+		$('#recruitUrl').val("");
+		$('#jobPosition').val("");
+		$('#workType').val("");
+		$('#salary').val("");
+		$('#managerName').val("");
+		$('#managerEmail').val("");
+		$('#managerPhone').val("");
+		$('#memo').val("");
+	}
+};

@@ -24,11 +24,11 @@
 							<option value="1">지원 완료</option>
 							<option value="2">서류 합격</option>
 							<option value="3">면접 예정</option>
-							<option value="4">불합격</option>
-							<option value="5">최종 합격</option>
+							<option value="999">불합격</option>
+							<option value="111">최종 합격</option>
 						</select>
 		
-						<button type="button" class="apply_add_btn">회사 등록</button>
+						<button type="button" id="addApply" class="apply_add_btn">회사 등록</button>
 					</div>
 		
 					<table id="applyGrid"></table>
@@ -39,11 +39,12 @@
 					<div id="applyInfo" class="apply_info dis_none">
 						<div class="apply_info_header">
 							<div class="apply_title_box">
-								<span id="applyCompanyName" class="apply_company_name"></span>
-								<span id="applyStatus" class="status_badge"></span>
+							<input id="applyCompanyName" class="detail_value apply_company_name" placeholder="회사명">
+								<input id="applyStatusStr" class="status_badge">
 							</div>
 			
 							<div class="apply_btn_box">
+								<button type="button" id="applyInsert" class="apply_insert_btn">등록</button>
 								<button type="button" id="applyEdit" class="apply_edit_btn">수정</button>
 								<button type="button" id="applyDelete" class="apply_delete_btn">삭제</button>
 							</div>
@@ -53,62 +54,62 @@
 							<div class="apply_detail_col">
 								<div class="apply_detail_row">
 									<span class="detail_label">지원일</span>
-									<input id="applyDate" class="detail_value" disabled>
+									<input id="applyDate" type="date" class="detail_value">
 								</div>
 			
 								<div class="apply_detail_row">
 									<span class="detail_label">채용 공고</span>
-									<input id="recruitUrl" class="detail_value" disabled>
+									<input id="recruitUrl" class="detail_value" placeholder="https://....">
 								</div>
 			
 								<div class="apply_detail_row">
 									<span class="detail_label">직무</span>
-									<input id="jobPosition" class="detail_value" disabled>
+									<input id="jobPosition" class="detail_value" >
 								</div>
 			
 								<div class="apply_detail_row">
 									<span class="detail_label">근무 형태</span>
-									<input id="workType" class="detail_value" disabled>
+									<input id="workType" class="detail_value" >
 								</div>
 			
 								<div class="apply_detail_row">
 									<span class="detail_label">연봉</span>
-									<input id="salary" class="detail_value" disabled>
+									<input id="salary" class="detail_value" >
 								</div>
 							</div>
 			
 							<div class="apply_detail_col">
 								<div class="apply_detail_row">
 									<span class="detail_label">담당자</span>
-									<input id="managerName" class="detail_value" disabled>
+									<input id="managerName" class="detail_value" >
 								</div>
 			
 								<div class="apply_detail_row">
 									<span class="detail_label">이메일</span>
-									<input id="managerEmail" class="detail_value" disabled>
+									<input id="managerEmail" class="detail_value" >
 								</div>
 			
 								<div class="apply_detail_row">
 									<span class="detail_label">연락처</span>
-									<input id="managerPhone" class="detail_value" disabled>
+									<input id="managerPhone" class="detail_value" >
 								</div>
 			
 								<div class="apply_detail_row">
 									<span class="detail_label">메모</span>
-									<textarea id="memo" class="detail_value" disabled></textarea>
+									<textarea id="memo" class="detail_value" ></textarea>
 								</div>
 							</div>
 						</div>
 			
-						<div id="changeStatus" class="dis_none apply_status_change_box">
-							<span class="status_label">상태 변경</span>
-							<select class="change_apply_status">
+						<div id="changeStatus" class=" apply_status_change_box">
+							<span class="status_label">지원 상태</span>
+							<select id="applyStatus" class="change_apply_status">
 								<option value="0">지원 취소</option>
 								<option value="1">지원 완료</option>
 								<option value="2">서류 합격</option>
 								<option value="3">면접 예정</option>
-								<option value="4">불합격</option>
-								<option value="5">최종 합격</option>
+								<option value="999">불합격</option>
+								<option value="111">최종 합격</option>
 							</select>
 						</div>
 			
